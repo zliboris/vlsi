@@ -61,6 +61,7 @@ module scan_codes(
             if (control == 1'b1) begin
                 control <= 1'b0;
             end
+
         end
     end
 

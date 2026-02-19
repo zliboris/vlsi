@@ -62,6 +62,8 @@ assign led[4:0] = cpu_out[4:0];
 assign led[5] = cpu_status;
 assign led[6] = ps2_control;
 assign led[7] = cpu_control;
+assign led[8] = 1'b0;
+assign led[9] = 1'b0;
 // ---------------------------------------------------
 // Module Instantiations
 
@@ -135,13 +137,14 @@ ssd ssd4_inst (
     .out(ssd4_out)
 );
 
+
 ps2 ps2_inst (
     .rst_n(rst_n),
     .ps2_clk(kbd[0]),
     .ps2_data(kbd[1]),
     .control(ps2_control),
     .clk(clk),
-    .clk_devided(clk_divided),
+    .clk_divided(clk_divided),
     .code(ps2_code)
 );
 

@@ -23,7 +23,7 @@ SIMUL_TOOL_EXE_DIR_PATH = C:\\altera\\13.1\\modelsim_ase\\win32aloem\\
 
 # DE0_TOP (CycloneIII)
 # DE0_CV_TOP (CycloneV)
-SYNTH_TOP_LEVEL_MODULE = DE0_TOP_PS2_TB
+SYNTH_TOP_LEVEL_MODULE = DE0_TOP
 # CycloneIII
 # CycloneV
 SYNTH_DEVICE_FAMILY = CycloneIII
