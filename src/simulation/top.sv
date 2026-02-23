@@ -15,6 +15,10 @@ class register_item extends uvm_sequence_item;
 	rand bit [3:0] in;
 	bit [3:0] out;
 	
+	constraint c_one_hot_op {
+		$countones({cl, ld, inc, dec, sr, sl}) <= 1;
+	}
+	
 	`uvm_object_utils_begin(register_item)
 		`uvm_field_int(cl, UVM_DEFAULT)
 		`uvm_field_int(ld, UVM_DEFAULT)
@@ -50,7 +54,7 @@ class generator extends uvm_sequence;
 		super.new(name);
 	endfunction
 	
-	int num = 20;
+	int num = 200;
 	
 	virtual task body();
 		for (int i = 0; i < num; i++) begin
@@ -192,7 +196,7 @@ class scoreboard extends uvm_scoreboard;
 	
 	bit [3:0] register = 4'h00;
 	
-	virtual function write(register_item item);
+	virtual function void write(register_item item);
 		if (register == item.out)
 			`uvm_info("Scoreboard", $sformatf("PASS!"), UVM_LOW)
 		else
@@ -297,7 +301,7 @@ interface register_if (
 endinterface
 
 // Testbench
-module testbench_uvm;
+module top;
 
 	reg clk;
 	
@@ -333,3 +337,10 @@ module testbench_uvm;
 	end
 
 endmodule
+/*
+vlib work
+vmap work work
+vlog -coveropt 3 +cover +acc register.v top.sv
+vsim -coverage -vopt work.top -c -do "coverage save -onexit -directive -codeAll register_cov.ucdb; run -all"
+vcover report -html register_cov.ucdb
+*/
